@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header><img src="logo.jpg" alt="" width="400px" height="200px"><br></header>
+    <nav>
+        <a href="Menu And Orders.html">Go to Menu </a>
+        <a href="Delivery.html">Delivery</a>
+        <a href="KHOZENI BUTCHERY.html">Home</a>
+    </nav>
+    <h1>WELCOME TO KHOZENI's BUTCHERY </h1>
+
+      
+    <Group-Box>🧑 Customer Details</Group-Box>
+
+    <label for="Name">Full Names</label>
+    <input type="text" id="Name" placeholder="Enter your full Name">
+
+    <label for="Surname">Surname</label>
+    <input type="text" id="Surname" placeholder="Enter your Surname">
+
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" placeholder="Enter your Email">
+
+     <label for="email">Home Address</label>
+    <input type="email" id="email" placeholder="Enter your Email">
+
+    <label for="phone">Phone</label>
+    <input type="" id="phone" placeholder="Enter your phone number">
+
+    <div>
+    <button onclick="confirmDetails(confirmed)">Confirm Information</button>
+
+    </div>
+    <div id="message"></div>
+  
+
+  <script>
+    function confirmDetails() {
+      let name = document.getElementById("name").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let phone = document.getElementById("phone").value.trim();
+      let message = document.getElementById("message");
+
+      if (name === "" || email === "" || phone === "") {
+        message.style.color = "red";
+        message.innerText = "⚠️ Please fill in all fields!";
+        return;
+      }
+
+      // Simple email + phone validation
+      let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      let phonePattern = /^[0-9]{10}$/;
+
+      if (!email.match(emailPattern)) {
+        message.style.color = "red";
+        message.innerText = "❌ Please enter a valid email address!";
+        return;
+      }
+
+      if (!phone.match(phonePattern)) {
+        message.style.color = "red";
+        message.innerText = "❌ Please enter a valid 10-digit phone number!";
+        return;
+      }
+
+      message.style.color = "green";
+      message.innerText = "✅ Customer information confirmed!";
+    }
+  </script>
+
+
+        <div>
+            <p4> <BR>DELIVERY:We deliver Nation wide and local. We have the fastest delivery than ever and local delivery is free and always available</BR></p4>
+            <img src="PICTURES/Delivery.png" class="DELIVERY">
+
+        </div>
+
+
+
+<footer>
+        <p5>ABOUT US <br></p5>
+        <a href=""><img src="Web Logos/Facebook Logo.jpeg" alt=""></a>
+        <a href=""><img src="Web Logos/call.jpeg" alt=""></a>
+        <a href=""><img src="Web Logos/Whatsapp Logo.jpeg" alt=""></a>
+        <a href=""><img src="Web Logos/Intsagram Logo.jpeg" alt=""></a>
+        <a href=""><img src="Web Logos/tiktok.png" alt=""></a>
+        <a href=""><img src="Web Logos/Twitter Logo.jpeg" alt=""></a>
+        <a href=""><img src="Web Logos/email.jpeg" alt=""></a>
+
+
+
+    </footer>
+</body>
+
+</html>

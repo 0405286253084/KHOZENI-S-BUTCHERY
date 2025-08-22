@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <header><img src="logo.jpg" alt="" width="400px" height="200px"><br></header>
+    <nav>
+        <a href="Menu And Orders.html">Go to Menu </a>
+        <a href="Delivery.html">Delivery</a>
+        <a href="KHOZENI BUTCHERY.html">Home</a>
+    </nav>
+    <h1>WELCOME TO KHOZENI's BUTCHERY </h1>
+
+   <!-- 1. Menu Pictures -->
+    <div class="image">
+
+        <p2>MENU AND ORDERS <br></p2>
+        <img src="MENU AND ORDERS/Beef Steak.png" class="Meat">
+        <img src="MENU AND ORDERS/Beef Stuew.png" class="Meat">
+        <img src="MENU AND ORDERS/Pork Steak.png" class="Meat">
+        <img src="MENU AND ORDERS/Pork Stuew.png" class="Meat">
+        <img src="MENU AND ORDERS/Full Chicken.png" class="Meat">
+        <img src="MENU AND ORDERS/Chicken Breast.png" class="Meat">
+        <img src="MENU AND ORDERS/Drum Stick.png" class="Meat">
+        <img src="MENU AND ORDERS/Wings.png" class="Meat">
+        <img src="MENU AND ORDERS/Pork Ribs.png" class="Meat">
+    </div>
+
+      <!-- 2. Declare checkboxes -->
+  <div class="items">
+    
+    <h3>Select Items:</h3>
+
+    <label><input type="checkbox" class="item" value="50"> Beef Steak - R70  per(kg)</label>
+    <label><input type="checkbox" class="item" value="40"> Beef Stew - R120 per(kg)</label>
+    <label><input type="checkbox" class="item" value="70"> Pork Steak - R70 per(kg)</label>
+    <label><input type="checkbox" class="item" value="30"> Pork Stew - R100 per(kg)</label>
+    <label><input type="checkbox" class="item" value="20"> Full Chicken - R100 per(kg)</label>
+    <label><input type="checkbox" class="item" value="15"> Chicken Breast - R80 per(kg)</label>
+    <label><input type="checkbox" class="item" value="15"> Drum Stick - R60 per(kg)</label>
+    <label><input type="checkbox" class="item" value="15"> Wings - R50 per(kg)</label>
+    <label><input type="checkbox" class="item" value="15"> Beef Rib - R150 per(kg)</label>
+
+
+  </div>
+
+
+  <grop>
+    
+  </grop>
+  <!-- 3. Select payment options -->
+  <div class="payment">
+    <h3>Select Payment Method:</h3>
+    <label><input type="radio" name="payment" value="Debit Card"> Debit Card</label><br>
+    <label><input type="radio" name="payment" value="Cash"> Cash</label><br>
+    <label><input type="radio" name="payment" value="EFT"> EFT</label><br>
+  </div>
+
+  <!-- 4. Pay button -->
+   <div class="Buttons">
+  <button onclick="payNow()">Pay</button>
+  
+   </div>
+   
+  <script>
+    function payNow() {
+      let items = document.querySelectorAll(".item:checked");
+      let payment = document.querySelector("input[name='payment']:checked");
+
+      // Validation
+      if (items.length === 0) {
+        alert("⚠️ Please select at least one item.");
+        return;
+      }
+      if (!payment) {
+        alert("⚠️ Please select a payment method.");
+        return;
+      }
+
+      // Calculate total
+      let total = 0;
+      let itemList = "";
+      items.forEach(item => {
+        let label = item.parentElement.innerText;
+        let price = parseFloat(item.value);
+        total += price;
+
+        // Format each line: Item - RPrice
+        itemList += label + "\n";
+      });
+
+      // Add date & time
+      let now = new Date();
+      let dateTime = now.toLocaleString();
+
+      // Create receipt content
+      let receiptContent =
+        "<pre style='font-family:monospace'>" +
+        "         🧾 RECEIPT\n" +
+        "----------------------------\n" +
+        itemList +
+        "----------------------------\n" +
+        "TOTAL: R" + total + "\n" +
+        "Payment: " + payment.value + "\n" +
+        "Date: " + dateTime + "\n" +
+        "----------------------------\n" +
+        "✅ Thank you for shopping!\n" +
+        "</pre>" +
+        "<button onclick='window.print()'>Print Receipt</button>";
+
+      // Open popup window
+      let receiptWindow = window.open("", "Receipt", "width=300,height=400");
+      receiptWindow.document.write("<html><head><title>Receipt</title></head><body>");
+      receiptWindow.document.write(receiptContent);
+      receiptWindow.document.write("</body></html>");
+      receiptWindow.document.close();
+    }
+  </script>
+  
+    <footer>
+        <p5>ABOUT US <br></p5>
+        <a href=""><img src="Web Logos/Facebook Logo.jpeg" alt=""></a>
+        <a href=""><img src="Web Logos/call.jpeg" alt=""></a>
+        <a href=""><img src="Web Logos/Whatsapp Logo.jpeg" alt=""></a>
+        <a href=""><img src="Web Logos/Intsagram Logo.jpeg" alt=""></a>
+        <a href=""><img src="Web Logos/tiktok.png" alt=""></a>
+        <a href=""><img src="Web Logos/Twitter Logo.jpeg" alt=""></a>
+        <a href=""><img src="Web Logos/email.jpeg" alt=""></a>
+    </footer>
+</body>
+
+</html>

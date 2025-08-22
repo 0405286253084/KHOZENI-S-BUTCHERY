@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup & Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: skyblue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #aaa;
+      width: 300px;
+    }
+
+    h3 {
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 8px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .success {
+      color: green;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .toggle {
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+      color: #007BFF;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h3 id="formTitle">Sign Up</h3>
+    <form id="userForm">
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button type="submit" id="submitBtn">Create Account</button>
+      <div class="error" id="errorMsg"></div>
+      <div class="success" id="successMsg"></div>
+        <a href="KHOZENI BUTCHERY.html">Home</a>
+      
+    </form>
+    <div class="toggle" id="toggleForm">Already have an account? Login</div>
+  </div>
+
+  <script>
+    const form = document.getElementById("userForm");
+    const errorMsg = document.getElementById("errorMsg");
+    const successMsg = document.getElementById("successMsg");
+    const toggleForm = document.getElementById("toggleForm");
+    const formTitle = document.getElementById("formTitle");
+    const submitBtn = document.getElementById("submitBtn");
+
+    let isLoginMode = false;
+    let savedUsername = "";
+    let savedPassword = "";
+
+    toggleForm.addEventListener("click", () => {
+      isLoginMode = !isLoginMode;
+      formTitle.textContent = isLoginMode ? "Login" : "Sign Up";
+      submitBtn.textContent = isLoginMode ? "Login" : "Create Account";
+      toggleForm.textContent = isLoginMode ? "Don't have an account? Sign Up" : "Already have an account? Login";
+      errorMsg.textContent = "";
+      successMsg.textContent = "";
+      form.reset();
+    });
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!username || !password) {
+        errorMsg.textContent = "Please fill in both fields.";
+        successMsg.textContent = "";
+        return;
+      }
+
+      if (isLoginMode) {
+        // Login logic
+        if (username === savedUsername && password === savedPassword) {
+          successMsg.textContent = "Login successful!";
+          errorMsg.textContent = "";
+        } else {
+          errorMsg.textContent = "Incorrect username or password.";
+          successMsg.textContent = "";
+        }
+      } else {
+        // Signup logic
+        savedUsername = username;
+        savedPassword = password;
+        successMsg.textContent = "Account created successfully! You can now log in.";
+        errorMsg.textContent = "";
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
