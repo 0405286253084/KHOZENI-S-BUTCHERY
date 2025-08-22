@@ -158,3 +158,23 @@ footer img {
       font-weight: bold;
       text-align: center;
     }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    .error {
+      color: red;
+    }
+    .confirmation {
+      background-color: #f4f4f4;
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin-top: 20px;
+      display: none;
+    }
+    .confirmation p {
+      margin: 8px 0;
+    }

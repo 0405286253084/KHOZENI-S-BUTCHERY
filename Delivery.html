@@ -15,65 +15,87 @@
         <a href="Delivery.html">Delivery</a>
         <a href="KHOZENI BUTCHERY.html">Home</a>
     </nav>
-    <h1>WELCOME TO KHOZENI's BUTCHERY </h1>
+    <body>
 
-      
-    <Group-Box>🧑 Customer Details</Group-Box>
+  <h1>Enter Customer Details</h1>
 
-    <label for="Name">Full Names</label>
-    <input type="text" id="Name" placeholder="Enter your full Name">
+  <form id="customerForm">
+    <input type="text" id="fullNames" placeholder="Full Names" required>
+    <input type="text" id="surname" placeholder="Surname" required>
+    <input type="email" id="email" placeholder="Email Address" required>
+    <textarea id="homeAddress" placeholder="Home Address" rows="3" required></textarea>
+    <input type="text" id="phone" placeholder="Phone Number" required>
+    
+    <button type="submit">Submit</button>
+    <p class="error" id="errorMsg"></p>
+  </form>
 
-    <label for="Surname">Surname</label>
-    <input type="text" id="Surname" placeholder="Enter your Surname">
-
-
-    <label for="email">Email Address</label>
-    <input type="email" id="email" placeholder="Enter your Email">
-
-     <label for="email">Home Address</label>
-    <input type="email" id="email" placeholder="Enter your Email">
-
-    <label for="phone">Phone</label>
-    <input type="" id="phone" placeholder="Enter your phone number">
-
-    <div>
-    <button onclick="confirmDetails(confirmed)">Confirm Information</button>
-
-    </div>
-    <div id="message"></div>
-  
+  <div class="confirmation" id="confirmationBox">
+    <h3>Please Confirm Your Details</h3>
+    <p><strong>Full Names:</strong> <span id="confirmFullNames"></span></p>
+    <p><strong>Surname:</strong> <span id="confirmSurname"></span></p>
+    <p><strong>Email:</strong> <span id="confirmEmail"></span></p>
+    <p><strong>Home Address:</strong> <span id="confirmHomeAddress"></span></p>
+    <p><strong>Phone Number:</strong> <span id="confirmPhone"></span></p>
+    
+    <button onclick="confirmDetails()">Confirm</button>
+    <button onclick="editDetails()">Edit</button>
+  </div>
 
   <script>
+    const form = document.getElementById('customerForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get form values
+      const fullNames = document.getElementById('fullNames').value.trim();
+      const surname = document.getElementById('surname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const homeAddress = document.getElementById('homeAddress').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+
+      // Validate
+      if (!fullNames || !surname || !email || !homeAddress || !phone) {
+        errorMsg.textContent = "All fields are required.";
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneRegex = /^[\d\s\-()+]+$/;
+
+      if (!emailRegex.test(email)) {
+        errorMsg.textContent = "Invalid email format.";
+        return;
+      }
+
+      if (!phoneRegex.test(phone)) {
+        errorMsg.textContent = "Invalid phone number format.";
+        return;
+      }
+
+      // Show confirmation
+      document.getElementById('confirmFullNames').textContent = fullNames;
+      document.getElementById('confirmSurname').textContent = surname;
+      document.getElementById('confirmEmail').textContent = email;
+      document.getElementById('confirmHomeAddress').textContent = homeAddress;
+      document.getElementById('confirmPhone').textContent = phone;
+
+      document.getElementById('confirmationBox').style.display = 'block';
+      form.style.display = 'none';
+      errorMsg.textContent = "";
+    });
+
     function confirmDetails() {
-      let name = document.getElementById("name").value.trim();
-      let email = document.getElementById("email").value.trim();
-      let phone = document.getElementById("phone").value.trim();
-      let message = document.getElementById("message");
+      alert("✅ Details confirmed. Thank you!");
+      // Submit to server or further process here
+      document.getElementById('confirmationBox').style.display = 'none';
+    }
 
-      if (name === "" || email === "" || phone === "") {
-        message.style.color = "red";
-        message.innerText = "⚠️ Please fill in all fields!";
-        return;
-      }
-
-      // Simple email + phone validation
-      let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-      let phonePattern = /^[0-9]{10}$/;
-
-      if (!email.match(emailPattern)) {
-        message.style.color = "red";
-        message.innerText = "❌ Please enter a valid email address!";
-        return;
-      }
-
-      if (!phone.match(phonePattern)) {
-        message.style.color = "red";
-        message.innerText = "❌ Please enter a valid 10-digit phone number!";
-        return;
-      }
-
-      message.style.color = "green";
-      message.innerText = "✅ Customer information confirmed!";
+    function editDetails() {
+      document.getElementById('confirmationBox').style.display = 'none';
+      document.getElementById('customerForm').style.display = 'block';
     }
   </script>
 
